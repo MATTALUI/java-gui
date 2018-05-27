@@ -39,4 +39,8 @@ jar {
       'Main-Class':'App'
     )
   }
+  
+  from('src/main/resources') {
+   include '**/*.css'
+  }
 }

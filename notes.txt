@@ -1,0 +1,26 @@
+====
+alternate stylesheet linking syntax
+====
+scene.getStylesheets().add(App.class.getResource("styles.css").toExternalForm());
+
+
+
+====
+alternate method of defining anonymous classes
+====
+btn.setOnAction(new EventHandler<ActionEvent>{
+  @Override
+  public void handle(){
+      System.out.println("This is a test!");
+  }
+});
+
+
+
+====
+defining tests that get run prebuild
+====
+@Test public void testAppHasAGreeting() {
+    App classUnderTest = new App();
+    assertNotNull("app should have a greeting", classUnderTest.getGreeting());
+}
