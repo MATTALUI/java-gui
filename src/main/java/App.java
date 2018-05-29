@@ -18,13 +18,15 @@
 public class App extends Application {
 
   private Stage primary = new Stage();
+
   @Override
   public void start(Stage primaryStage){
     this.primary = primaryStage;
-    Scene login = this.buildLogin();
+    // Scene login = this.buildLogin();
+    Scene todo = this.buildTodo();
     primaryStage.setTitle("Login");
-    primaryStage.setScene(login);
-    // primaryStage.setSize(new Dimension(100, 200));
+    // primaryStage.setScene(login);
+    primaryStage.setScene(todo);
     primaryStage.setResizable(false);
     primaryStage.show();
   }
@@ -51,7 +53,7 @@ public class App extends Application {
     grid.add(usernameInput, 1,1);
     grid.add(password,0,2);
     grid.add(passwordInput,1,2);
-    // grid.setGridLinesVisible(true);
+    grid.setGridLinesVisible(true);
 
 
 
@@ -67,16 +69,43 @@ public class App extends Application {
     {
       String user = usernameInput.getText();
       String pass = passwordInput.getText();
-      if(user.equals("matt") && pass.equals("pass"))
+      if(user.equals("mattalui") && pass.equals("password"))
       {
-        // this.primary.setHeight(600);
-        actiontarget.setFill(Color.GREEN);
-        actiontarget.setText("You did it!");
+        Scene todo = this.buildTodo();
+        this.primary.setScene(todo);
       }else{
         actiontarget.setFill(Color.FIREBRICK);
         actiontarget.setText("Credentials Incorrect.");
       }
     });
     return login;
+  }
+
+  private Scene buildTodo(){
+    this.primary.setHeight(600);
+    this.primary.setWidth(400);
+
+    GridPane grid = new GridPane();
+    grid.setGridLinesVisible(true);
+    grid.setHgap(7);
+    grid.setVgap(7);
+    grid.setPadding(new Insets(25,25,25,25));
+
+    Text scenetitle = new Text("Todo:");
+    scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+    grid.add(scenetitle,0,0,3,1);
+
+    TextField todoInput = new TextField();
+    grid.add(todoInput,0,10,2,1);
+
+    Button addButton = new Button("add");
+    addButton.setOnAction(event -> {
+      System.out.println(todoInput.getText());
+    });
+    grid.add(addButton, 2, 10);
+
+    Scene todo = new Scene(grid, 300, 275);
+    todo.getStylesheets().add("styles.css");
+    return todo;
   }
 }
